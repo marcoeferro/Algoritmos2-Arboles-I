@@ -17,9 +17,9 @@ public class ArbolBinario
     }
     
     //Metodos
-    public Nodo buscarNodo(Nodo nodo){
+    public Nodo buscarNodo(Object dato){
         Nodo actual = raiz;
-        int datonodo = Integer.parseInt((nodo.dato.toString()));
+        int datonodo = Integer.parseInt((String.valueOf(dato)));
         
         while (actual != null){
             
@@ -27,7 +27,7 @@ public class ArbolBinario
                 actual = actual.ramaIzdo;
             }else if(datonodo>Integer.parseInt((actual.dato.toString()))){
                 actual = actual.ramaDcho;
-            }else if (actual.valorNodo() == nodo.valorNodo()){
+            }else if (Integer.parseInt(actual.toString()) == datonodo){
                return actual;
             }
         }
@@ -63,9 +63,9 @@ public class ArbolBinario
     }
   
     
-    /*public void eliminar(Object dato){
+    /*public void eliminar(Object nodo){
         
-        Nodo elim = buscarNodo(raiz,dato);
+        Nodo elim = buscarNodo(nodo);
         
         
         
