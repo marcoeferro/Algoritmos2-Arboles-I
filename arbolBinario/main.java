@@ -1,16 +1,15 @@
 package arbolBinario;
 import java.util.Scanner;
 public class main{
-    public static void main(String[] args){
+    public static void main(String [] args){
      
-        int condicion=99,rta=99;
-        String subarbol;
+        int condicion=99,rta=99,contador_nodos=0;
+        String nvo_nodo;
         Scanner input = new Scanner(System.in);
-        String izq,der,padre;
-        ArbolBinario arbol = new ArbolBinario();
+        ArbolBinario arbol = new ArbolBinario() ;
     
         do{
-            System.out.print("[1] Armar arbol \n");
+            System.out.print("[1] Añadir Nodo \n");
             System.out.print("[2] Mostrar Arbol \n");
             System.out.print("[3] Eliminar Nodo \n");
             System.out.print("[0] Salir del programa \n");
@@ -19,33 +18,24 @@ public class main{
             
             switch(rta){
                 case 1:
-                    do{
-                        System.out.print("Ingrese Los datos del subarbol izquierdo");
-                        
-                        System.out.print("Ingrese el dato del nodo raiz");
-                        padre = input.nextLine();
-                        System.out.print("Ingrese el dato del nodo izquierdo");
-                        izq = input.nextLine();
-                        System.out.print("Ingrese el dato del nodo derecho");
-                        der = input.nextLine();
-                        arbol.nvoArbol(der,padre,izq);
-                        
-                        System.out.print("Ingrese Los datos del subarbol derecho");
-                        
-                        System.out.print("Ingrese el dato del nodo raiz");
-                        padre = input.nextLine();
-                        System.out.print("Ingrese el dato del nodo izquierdo");
-                        izq = input.nextLine();
-                        System.out.print("Ingrese el dato del nodo derecho");
-                        der = input.nextLine();
-                        arbol.nvoArbol(der,padre,izq);
-                        
-                        System.out.print("Ingrese el dato del nodo raiz de los subarboles anteriores");
-                        arbol.armarArbol(input.nextLine());
-                        
-                        System.out.print("¿Desea Ingresar nuevo subarbol ? (si / no)");
-                        subarbol=input.nextLine();
-                    }while (subarbol != "no");
+                    if (contador_nodos==0){
+                        String valor;
+                        System.out.print("\n Ingrese el valor del nodo raiz");
+                        valor = input.nextLine();
+                        arbol = new ArbolBinario(valor);
+                        contador_nodos++;
+                    }else{ 
+                        do{
+                            String valor;
+                            System.out.print("\n Ingrese el valor del nodo ");
+                            valor = input.nextLine();
+                            Nodo nodo = new Nodo(valor);
+                            arbol.insertar(nodo);
+                            System.out.print("\n¿Desea Ingresar nuevo nodo ? (si / no)\n");
+                            nvo_nodo=input.nextLine();
+                        }while (nvo_nodo != "no");
+                    }
+                    
                     break;
                 case 2:
                     System.out.print("Ingrese el valor que desea Eliminar \n");

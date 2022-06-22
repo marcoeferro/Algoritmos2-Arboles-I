@@ -13,12 +13,6 @@ public class Nodo
 		this.nivel =0;
 	}
 	
-	public Nodo(Nodo ramaIzdo, Object dato, Nodo ramaDcho){
-		this.dato=dato;
-		this.ramaIzdo = ramaIzdo;
-		this.ramaDcho = ramaDcho;
-	}
-	
 	@Override
 	public String toString() {
 		return String.valueOf(dato);

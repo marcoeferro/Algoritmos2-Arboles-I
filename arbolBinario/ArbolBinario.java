@@ -1,6 +1,5 @@
 package arbolBinario;
 
-import java.util.ArrayList;
 public class ArbolBinario
 
 {
@@ -12,8 +11,8 @@ public class ArbolBinario
         raiz = null;
     }
     
-    public ArbolBinario(Nodo raiz){
-        this.raiz = raiz;
+    public ArbolBinario(Object dato){
+        this.raiz = new Nodo(dato);
     }
     
     //Metodos
@@ -41,9 +40,9 @@ public class ArbolBinario
         while (actual != null){
             anterior = actual;
             if(datonodo<Integer.parseInt((actual.dato.toString()))){
-                actual = actual.ramaIzdo;
+                actual = actual.subarbolIzdo();
             }else if(datonodo>Integer.parseInt((actual.dato.toString()))){
-                actual = actual.ramaDcho;
+                actual = actual.subarbolDcho();
             }else {
                 System.out.print("\n El valor insertado ya existe \n");
                 return;
@@ -63,36 +62,22 @@ public class ArbolBinario
     }
   
     
-    /*public void eliminar(Object nodo){
+    public void eliminar(Object dato){
         
-        Nodo elim = buscarNodo(nodo);
+        Nodo elim = buscarNodo(dato);
         
-        
-        
-        if(elim.padre.ramaIzdo==elim){
-            elim.padre.ramaIzdo= null;
-        }else{
-            elim.padre.ramaDcho= null;
+        if(elim.subarbolIzdo()!=null){
+            Nodo aux_izq =elim.subarbolIzdo();
+            insertar(aux_izq);
+        }else if (elim.subarbolDcho()!=null){
+            Nodo aux_Dcho =elim.subarbolDcho();
+            insertar(aux_Dcho);
         }
+        
         System.out.print("\n Nodo eliminado");
         
     }
-    public static void preordenVacante(Nodo nodo){
-        
-        if(nodo.ramaDcho==null ||nodo.ramaIzdo==null ){
-            System.out.print(nodo.valorNodo().toString());
-        }
-        
-        
-        if (nodo.subarbolIzdo() != null){
-            preorden(nodo.subarbolIzdo());
-        }
-        
-        if (nodo.subarbolDcho() != null){
-            preorden(nodo.subarbolDcho());
-        }
-        
-    }*/
+    
 
     // Recorrido de un árbol binario en preorden
     public static void preorden(Nodo nodo){
