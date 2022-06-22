@@ -82,7 +82,7 @@ public class ArbolBinario
     // Recorrido de un árbol binario en preorden
     public static void preorden(Nodo nodo){
         
-        System.out.print(nodo.valorNodo().toString());
+        System.out.print(" ["+String.valueOf(nodo)+"] ");
         
         if (nodo.subarbolIzdo() != null){
             preorden(nodo.subarbolIzdo());
@@ -102,7 +102,7 @@ public class ArbolBinario
             inorden(nodo.subarbolIzdo());
         }
         
-        System.out.print(nodo.valorNodo().toString());
+        System.out.print(" ["+String.valueOf(nodo)+"] ");
         
         if (nodo.subarbolDcho() != null){
             inorden(nodo.subarbolDcho());
@@ -121,7 +121,7 @@ public class ArbolBinario
             postorden(nodo.subarbolDcho());
         }
         
-        System.out.print(nodo.valorNodo().toString());
+        System.out.print(" ["+String.valueOf(nodo)+"] ");
         
     }
 

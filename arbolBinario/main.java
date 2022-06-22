@@ -4,14 +4,14 @@ public class main{
     public static void main(String [] args){
      
         int condicion=99,rta=99,contador_nodos=0;
-        String nvo_nodo;
+        int nvo_nodo=99;
         Scanner input = new Scanner(System.in);
         ArbolBinario arbol = new ArbolBinario() ;
     
         do{
-            System.out.print("[1] Añadir Nodo \n");
-            System.out.print("[2] Mostrar Arbol \n");
-            System.out.print("[3] Eliminar Nodo \n");
+            System.out.print("\n[1] Añadir Nodo \n");
+            System.out.print("[2] Eliminar Nodo \n");
+            System.out.print("[3] Mostrar Arbol (en preorden)\n");
             System.out.print("[4] Recorrer pre orden in orden post orden \n");
             System.out.print("[0] Salir del programa \n");
             rta=input.nextInt();
@@ -21,20 +21,21 @@ public class main{
                 case 1:
                     if (contador_nodos==0){
                         String valor;
-                        System.out.print("\n Ingrese el valor del nodo raiz");
+                        System.out.print("\n Ingrese el valor del nodo raiz \n");
                         valor = input.nextLine();
                         arbol = new ArbolBinario(valor);
                         contador_nodos++;
                     }else{ 
                         do{
                             String valor;
-                            System.out.print("\n Ingrese el valor del nodo ");
+                            System.out.print("\n Ingrese el valor del nodo \n");
                             valor = input.nextLine();
                             Nodo nodo = new Nodo(valor);
                             arbol.insertar(nodo);
-                            System.out.print("\n¿Desea Ingresar nuevo nodo ? (si / no)\n");
-                            nvo_nodo=input.nextLine();
-                        }while (nvo_nodo != "no");
+                            System.out.print("\n¿Desea Ingresar nuevo nodo ? (si=1 / no=0)\n");
+                            nvo_nodo=input.nextInt();
+                            input.nextLine();
+                        }while (nvo_nodo !=0);
                     }
                     
                     break;
@@ -45,19 +46,16 @@ public class main{
                     arbol.eliminar(valor);
                     break;
                 case 3:
-                    String valor2;
-                    System.out.print("Ingrese el valor que desea Buscar \n");
-                    valor2 = input.nextLine();
-                    arbol.buscarNodo(valor2);
-
+                    ArbolBinario.preorden(arbol.raiz);
+                    System.out.print("\n");
                     break;
                 case 4:
                     
-                System.out.print("Recorrido en Orden :");
+                    System.out.print("\n Recorrido en Orden :\n");
                     ArbolBinario.inorden(arbol.raiz);
-                    System.out.print("Recorrido en pre Orden :");
+                    System.out.print("\nRecorrido en pre Orden : \n");
                     ArbolBinario.preorden(arbol.raiz);
-                    System.out.print("Recorrido en Post Orden :");
+                    System.out.print("\nRecorrido en Post Orden : \n");
                     ArbolBinario.postorden(arbol.raiz);
                     
                     break;

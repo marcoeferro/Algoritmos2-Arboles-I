@@ -4,13 +4,12 @@ public class Nodo
 	protected Object dato;
 	protected Nodo ramaIzdo;
 	protected Nodo ramaDcho;
-	protected int nivel;
+	
 	//constructores
 	public Nodo(Object valor){
 		dato = valor;
 		this.ramaIzdo = null;
 		this.ramaDcho = null;
-		this.nivel =0;
 	}
 	
 	@Override
