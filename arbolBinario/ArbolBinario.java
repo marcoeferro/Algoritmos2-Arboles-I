@@ -4,9 +4,6 @@ import java.util.ArrayList;
 public class ArbolBinario
 
 {
-
-  
-
     protected Nodo raiz;
     
     //contructores
@@ -20,115 +17,57 @@ public class ArbolBinario
     }
     
     //Metodos
-    public Nodo raizArbol(){
-        return raiz;
-    }
+    public Nodo buscarNodo(Nodo nodo){
+        Nodo actual = raiz;
+        int datonodo = Integer.parseInt((nodo.dato.toString()));
         
-    public boolean esVacio(){
-        return raiz == null;
-    }
-    
-    public Nodo buscarNodo(Nodo nodo, Object dato){
-        
-        if(dato != nodo.valorNodo()){
+        while (actual != null){
             
-            if (nodo.subarbolIzdo() != null){
-                buscarNodo(nodo.subarbolIzdo(),dato);
+            if(datonodo<Integer.parseInt((actual.dato.toString()))){
+                actual = actual.ramaIzdo;
+            }else if(datonodo>Integer.parseInt((actual.dato.toString()))){
+                actual = actual.ramaDcho;
+            }else if (actual.valorNodo() == nodo.valorNodo()){
+               return actual;
             }
-            
-            if (nodo.subarbolDcho() != null){
-                buscarNodo(nodo.subarbolDcho(),dato);
-            }
-        }else{
-            return nodo;
         }
         return null;
     }
 
-    public void insertarNodo(Nodo nodo, int cantidad){
-        
+    public void insertar(Nodo nodo){
+        Nodo actual = raiz;
+        Nodo anterior = new Nodo(null);
+        int datonodo = Integer.parseInt((nodo.dato.toString()));
+        while (actual != null){
+            anterior = actual;
+            if(datonodo<Integer.parseInt((actual.dato.toString()))){
+                actual = actual.ramaIzdo;
+            }else if(datonodo>Integer.parseInt((actual.dato.toString()))){
+                actual = actual.ramaDcho;
+            }else {
+                System.out.print("\n El valor insertado ya existe \n");
+                return;
+            }
+        }
+        if(datonodo>Integer.parseInt((anterior.dato.toString()))){
+            anterior.ramaDcho = nodo;
+
+        }else if(datonodo<Integer.parseInt((anterior.dato.toString()))){
+            anterior.ramaIzdo=nodo;
+        }else {
+            System.out.print("\n El valor insertado ya existe \n");
+            return;
+        }
+
         
     }
   
-    public void insertar( Nodo nodo,Nodo izq,Nodo der){
-        
-        if(nodo.nivel!=0){
-            nodo.ramaIzdo = izq;
-            nodo.ramaIzdo.nivel = nodo.nivel--;
-            insertar(nodo.ramaIzdo,izq,der);
-            nodo.ramaDcho = der;
-            nodo.ramaDcho.nivel = nodo.nivel--;
-            insertar(nodo.ramaDcho,izq,der);
-        }
-        
-
-    }
     
     /*public void eliminar(Object dato){
         
         Nodo elim = buscarNodo(raiz,dato);
         
-        if (elim.ramaDcho!=null || elim.ramaDcho!=null){
-            Scanner input = new Scanner(System.in);
-            Nodo padre ;
-
-            System.out.print("el nodo a eliminar tiene hijos que debe reasignar\n");
-            System.out.print("estos son los nodos del arbol :\n");
-            preordenVacante(raiz);
-            if(elim.ramaDcho!=null){
-                System.out.print("ingrese el valor del nuevo padre de "+ elim.ramaDcho);
-                padre = buscarNodo(raiz, input.nextLine());
-                if(padre!=null){
-                    
-                    if(padre.ramaIzdo==null){
-                        System.out.print("quiere que el valor "+elim.ramaDcho+" sea el hijo izquierdo (si / no)");
-                        if (input.nextLine()=="si"){
-                            padre.ramaIzdo = elim.ramaDcho;
-
-                        }else{
-                            if(padre.ramaDcho==null){
-                                System.out.print("quiere que el valor "+elim.ramaDcho+" sea el hijo derecho (si / no)");
-                                if (input.nextLine()=="si"){
-                                    padre.ramaDcho=elim.ramaDcho;
-
-                                }
-                            }
-    
-                        } 
-                    }
-                }else{
-                    System.out.print("el valor del padre no corresponde con ningun nodo");
-                }
-                
-                
-            }else if(elim.ramaIzdo!=null){
-                System.out.print("ingrese el valor del nuevo padre de "+ elim.ramaIzdo);
-                padre = buscarNodo(raiz, input.nextLine());
-                if(padre!=null){
-                    
-                    if(padre.ramaIzdo==null){
-                        System.out.print("quiere que el valor "+elim.ramaIzdo+" sea el hijo izquierdo (si / no)");
-                        if (input.nextLine()=="si"){
-                            padre.ramaIzdo = elim.ramaIzdo;
-
-                        }else{
-                            if(padre.ramaDcho==null){
-                                System.out.print("quiere que el valor "+elim.ramaIzdo+" sea el hijo derecho (si / no)");
-                                if (input.nextLine()=="si"){
-                                    padre.ramaDcho=elim.ramaIzdo;
-
-                                }
-                            }
-    
-                        } 
-                    }
-                }else{
-                    System.out.print("el valor del padre no corresponde con ningun nodo");
-                }
-
-            }
-            input.close();
-        }
+        
         
         if(elim.padre.ramaIzdo==elim){
             elim.padre.ramaIzdo= null;

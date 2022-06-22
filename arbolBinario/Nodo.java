@@ -19,6 +19,11 @@ public class Nodo
 		this.ramaDcho = ramaDcho;
 	}
 	
+	@Override
+	public String toString() {
+		return String.valueOf(dato);
+	}
+
 	// Getters
 	public Object valorNodo(){ 
 		return dato; }
