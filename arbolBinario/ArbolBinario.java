@@ -36,43 +36,50 @@ public class ArbolBinario
     public void insertar(Nodo nodo){
         Nodo actual = raiz;
         Nodo anterior = new Nodo(null);
-        int datonodo = Integer.parseInt((nodo.dato.toString()));
-        while (actual != null){
-            anterior = actual;
-            if(datonodo<Integer.parseInt((actual.dato.toString()))){
-                actual = actual.subarbolIzdo();
-            }else if(datonodo>Integer.parseInt((actual.dato.toString()))){
-                actual = actual.subarbolDcho();
+        
+        if (nodo !=null){
+            int datonodo = Integer.parseInt((nodo.dato.toString()));
+            while (actual != null){
+                anterior = actual;
+                if(datonodo<Integer.parseInt((actual.dato.toString()))){
+                    actual = actual.subarbolIzdo();
+                }else if(datonodo>Integer.parseInt((actual.dato.toString()))){
+                    actual = actual.subarbolDcho();
+                }else {
+                    System.out.print("\n El valor insertado ya existe \n");
+                    return;
+                }
+            }
+            if(datonodo>Integer.parseInt((anterior.dato.toString()))){
+                anterior.ramaDcho = nodo;
+
+            }else if(datonodo<Integer.parseInt((anterior.dato.toString()))){
+                anterior.ramaIzdo=nodo;
             }else {
                 System.out.print("\n El valor insertado ya existe \n");
                 return;
             }
-        }
-        if(datonodo>Integer.parseInt((anterior.dato.toString()))){
-            anterior.ramaDcho = nodo;
-
-        }else if(datonodo<Integer.parseInt((anterior.dato.toString()))){
-            anterior.ramaIzdo=nodo;
-        }else {
-            System.out.print("\n El valor insertado ya existe \n");
+        }else{
             return;
         }
-
-        
     }
   
     
     public void eliminar(Object dato){
         
         Nodo elim = buscarNodo(dato);
+        Nodo aux_izq =new Nodo(null);
+        Nodo aux_Dcho =new Nodo(null);
         
-        if(elim.subarbolIzdo()!=null){
-            Nodo aux_izq =elim.subarbolIzdo();
-            insertar(aux_izq);
-        }else if (elim.subarbolDcho()!=null){
-            Nodo aux_Dcho =elim.subarbolDcho();
-            insertar(aux_Dcho);
-        }
+        if(elim.subarbolIzdo()!=null || elim.subarbolDcho()!=null){
+            aux_izq =elim.subarbolIzdo();
+            aux_Dcho =elim.subarbolDcho();
+        } 
+       
+        elim=null;
+         
+        insertar(aux_izq);
+        insertar(aux_Dcho);
         
         System.out.print("\n Nodo eliminado");
         
