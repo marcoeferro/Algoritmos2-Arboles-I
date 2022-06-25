@@ -11,7 +11,7 @@ public class main{
         do{
             System.out.print("\n[1] Añadir Nodo \n");
             System.out.print("[2] Eliminar Nodo \n");
-            System.out.print("[3] Mostrar Arbol (en preorden)\n");
+            System.out.print("[3] Mostrar Arbol (inorden)\n");
             System.out.print("[4] Recorrer pre orden in orden post orden \n");
             System.out.print("[0] Salir del programa \n");
             rta=input.nextInt();
@@ -20,9 +20,10 @@ public class main{
             switch(rta){
                 case 1:
                     if (contador_nodos==0){
-                        String valor;
+                        int valor;
                         System.out.print("\n Ingrese el valor del nodo raiz \n");
-                        valor = input.nextLine();
+                        valor = input.nextInt();
+                        input.nextLine();
                         arbol = new ArbolBinario(valor);
                         contador_nodos++;
                     }else{ 
@@ -36,27 +37,31 @@ public class main{
                             nvo_nodo=input.nextInt();
                             input.nextLine();
                         }while (nvo_nodo !=0);
-                    }
-                    
+                    }                    
                     break;
                 case 2:
                     String valor;
                     System.out.print("Ingrese el valor que desea Eliminar \n");
                     valor = input.nextLine();
-                    arbol.eliminar(valor);
+                    arbol.raiz=arbol.eliminar(arbol.raiz,valor);
                     break;
                 case 3:
-                    ArbolBinario.preorden(arbol.raiz);
-                    System.out.print("\n");
+                    if (arbol.raiz!=null){
+                        arbol.inorden(arbol.raiz);
+                        System.out.print("\n");
+                    }else{
+                        System.out.print("\n no hay arbol para mostrar \n");
+                    }
+                    
                     break;
                 case 4:
                     
                     System.out.print("\n Recorrido en Orden :\n");
-                    ArbolBinario.inorden(arbol.raiz);
+                    arbol.inorden(arbol.raiz);
                     System.out.print("\nRecorrido en pre Orden : \n");
-                    ArbolBinario.preorden(arbol.raiz);
+                    arbol.preorden(arbol.raiz);
                     System.out.print("\nRecorrido en Post Orden : \n");
-                    ArbolBinario.postorden(arbol.raiz);
+                    arbol.postorden(arbol.raiz);
                     
                     break;
                 case 0 :

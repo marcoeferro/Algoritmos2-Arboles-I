@@ -3,34 +3,39 @@ package arbolBinario;
 public class ArbolBinario
 
 {
-    protected Nodo raiz;
+    protected Nodo raiz= new Nodo(null);
     
     //contructores
     public ArbolBinario(){
         
-        raiz = null;
+        raiz.dato = null;
     }
     
     public ArbolBinario(Object dato){
-        this.raiz = new Nodo(dato);
+        this.raiz.dato = new Nodo(dato);
     }
     
     //Metodos
     public Nodo buscarNodo(Object dato){
         Nodo actual = raiz;
-        int datonodo = Integer.parseInt((String.valueOf(dato)));
         
-        while (actual != null){
+        if (dato != null){
             
-            if(datonodo<Integer.parseInt((actual.dato.toString()))){
-                actual = actual.ramaIzdo;
-            }else if(datonodo>Integer.parseInt((actual.dato.toString()))){
-                actual = actual.ramaDcho;
-            }else if (Integer.parseInt(actual.toString()) == datonodo){
-               return actual;
+            int datonodo = Integer.parseInt((String.valueOf(dato)));
+        
+            while (Integer.parseInt(String.valueOf(actual.dato)) != datonodo){
+                
+                if(datonodo<Integer.parseInt(String.valueOf(actual.dato))){
+                    actual = actual.ramaIzdo;
+                }else if(datonodo>Integer.parseInt(String.valueOf(actual.dato))){
+                    actual = actual.ramaDcho;
+                }
             }
+            return actual;
+        }else {
+            return null;
         }
-        return null;
+        
     }
 
     public void insertar(Nodo nodo){
@@ -65,31 +70,43 @@ public class ArbolBinario
     }
   
     
-    public void eliminar(Object dato){
-        
-        Nodo elim = buscarNodo(dato);
-        Nodo aux_izq =new Nodo(null);
-        Nodo aux_Dcho =new Nodo(null);
-        
-        if(elim.subarbolIzdo()!=null || elim.subarbolDcho()!=null){
-            aux_izq =elim.subarbolIzdo();
-            aux_Dcho =elim.subarbolDcho();
-        } 
-       
-        elim=null;
-         
-        insertar(aux_izq);
-        insertar(aux_Dcho);
-        
-        System.out.print("\n Nodo eliminado");
-        
+    public Nodo eliminar(Nodo Root,Object dato){
+        Nodo aux=null;
+
+        if(Root==null){
+            
+            return Root;
+        }
+        if(Integer.parseInt(String.valueOf(dato)) < Integer.parseInt(String.valueOf(Root.dato))){
+
+            Root.ramaIzdo=eliminar(Root.ramaIzdo,dato);
+
+        }else if (Integer.parseInt(String.valueOf(dato)) > Integer.parseInt(String.valueOf(Root.dato))){
+            Root.ramaDcho=eliminar(Root.ramaDcho,dato);
+        }else{
+            if(Root.ramaIzdo!=null && Root.ramaDcho!= null){                
+                aux =Root.ramaDcho;
+                return Root.ramaIzdo;
+
+            }else if(Root.ramaIzdo!=null){                
+                return Root.ramaIzdo;
+
+            }else if (Root.ramaDcho!= null){                
+                return Root.ramaDcho;
+
+            }else{                
+                return Root.ramaIzdo;
+            }
+        }
+        insertar(aux);
+        return Root;
     }
     
 
     // Recorrido de un árbol binario en preorden
-    public static void preorden(Nodo nodo){
+    public void preorden(Nodo nodo){
         
-        System.out.print(" ["+String.valueOf(nodo)+"] ");
+        System.out.print(" ["+String.valueOf(nodo.dato)+"] ");
         
         if (nodo.subarbolIzdo() != null){
             preorden(nodo.subarbolIzdo());
@@ -102,14 +119,14 @@ public class ArbolBinario
     }
 
     // Recorrido de un árbol binario en inorden
-    public static void inorden(Nodo nodo){
+    public void inorden(Nodo nodo){
         
         
         if (nodo.subarbolIzdo() != null){
             inorden(nodo.subarbolIzdo());
         }
         
-        System.out.print(" ["+String.valueOf(nodo)+"] ");
+        System.out.print(" ["+String.valueOf(nodo.dato)+"] ");
         
         if (nodo.subarbolDcho() != null){
             inorden(nodo.subarbolDcho());
@@ -118,7 +135,7 @@ public class ArbolBinario
     }
     
     // Recorrido de un árbol binario en postorden
-    public static void postorden(Nodo nodo){
+    public void postorden(Nodo nodo){
         
         if (nodo.subarbolIzdo() != null){
             postorden(nodo.subarbolIzdo());
@@ -128,7 +145,7 @@ public class ArbolBinario
             postorden(nodo.subarbolDcho());
         }
         
-        System.out.print(" ["+String.valueOf(nodo)+"] ");
+        System.out.print(" ["+String.valueOf(nodo.dato)+"] ");
         
     }
 
